@@ -35,5 +35,5 @@ production:
   username: ulegymsnkxjnty
   password: 2dd4c89ec0743e9a38e7f1e5151ff53ea3ff3c3e34bd3e314430e5b6fa44a660
   hostname: ec2-54-225-241-25.compute-1.amazonaws.com
-  post: 5432
+  port: 5432
   database: d86jlb4e27c5ap
