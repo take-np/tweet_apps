@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TweetApps</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+
+<!--以下は <a href="#"></a>を、link_toに変更している  -->
+<body>
+  <header>
+    <div class="header-logo">
+      <%= link_to("TweetApp", "/") %>
+      <!-- <a href="/">TweetApp</a> -->
+    </div>
+    <ul class="header-menus">
+      <li>
+        <%= link_to("TweetAppとは","/about")%>
+        <!-- <a href="/about">TweetAppとは</a> -->
+      </li>
+      <li>
+        <%= link_to("投稿一覧","/posts/index")%>
+      </li>
+      <li>
+        <%= link_to("新規投稿", "/posts/new") %>
+      </li>
+      <li>
+        <%= link_to("ユーザー一覧", "/users/index") %>
+      </li>
+      <li>
+        <%= link_to("新規登録", "/signup") %>
+      </li>
+      <li>
+        <%= link_to("ログイン", "/login")%>
+      </li>
+    </ul>
+  </header>
+
+<%= yield %> <!-- ここに各ビューファイルが代入される -->
+    <% if flash[:notice]%>
+      <div class="flash">
+        <%= flash[:notice ]%>
+      </div>
+    <% end %>
+
+</body>
+</html>

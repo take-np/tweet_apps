@@ -1,0 +1,30 @@
+<!--  <header>は、app/views/application.html.erbにまとめて移動している-->
+<!--
+変数はまとめて定義したほうがきれい。
+最初は下の各postのところで定義してたがほうがきれい
+<% post1 = "今日からProgateでRailsの勉強するよー！"%>
+<% post2 = "投稿一覧ページ作成中！"%>
+-->
+<!-- <% posts =[
+  "今日からProgateでRailsの勉強するよー！",
+  "投稿一覧ページ作成中！"
+  ]%> -->
+
+<div class="main posts-index">
+  <div class="container">
+<!--      <% post1 = "今日からProgateでRailsの勉強するよー！"%> -->
+    <% @posts.each do |post|%>
+      <div class="posts-index-item">
+        <%= link_to(post.content,"/posts/#{post.id}") %>
+        <!-- 上記の[post.content]は""では囲まない。それは、なぜか？もともと文字列型だからか？ -->
+      </div>
+    <% end %>
+    </div>
+  </div>
+</div>
+
+
+<!--
+<h1>Posts#index</h1>
+<p>Find me in app/views/posts/index.html.erb</p>
+-->

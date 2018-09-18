@@ -1,0 +1,15 @@
+<div class="main posts-new">
+  <div class="container">
+    <h1 class="form-heading">編集する</h1>
+      <% @post.errors.full_messages.each do |message| %>
+        <div class="form-error">
+        <%= message %>
+        </div>
+      <% end %>
+    <%= form_tag("/posts/#{@post.id}/update") do%>
+    <textarea name="content"><%= @post.content %></textarea>
+    <!-- editアクションでURLのidと同じidの投稿データをデータベースから取得する -->
+    <input type="submit" value="保存">
+    <% end %>
+    </div>
+</div>
