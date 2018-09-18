@@ -28,4 +28,7 @@ test:
 
 production:
   <<: *default
-  database: db/production.sqlite3
+  # 2018/09/18に右のコメントアウト。下を追記。database: db/production.sqlite3
+  dapter: postgresql
+  encoding: unicode
+  pool: 5
