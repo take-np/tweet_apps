@@ -1,48 +1,80 @@
 <!DOCTYPE html>
+<!-- ---------------------------------------- -->
+<!--  以下、bootstrapを利用するための設定。これをapplication.html.erbにはい→つけると、各ページでBootstraupのテンプレが利用可能となる。-->
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+<!-- ---------------------------------------- -->
 <html>
-<head>
-  <title>TweetApps</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
+  <head>
+    <title>TweetApp</title>
+    <%= csrf_meta_tags %>
 
-<!--以下は <a href="#"></a>を、link_toに変更している  -->
-<body>
-  <header>
-    <div class="header-logo">
-      <%= link_to("TweetApp", "/") %>
-      <!-- <a href="/">TweetApp</a> -->
-    </div>
-    <ul class="header-menus">
-      <li>
-        <%= link_to("TweetAppとは","/about")%>
-        <!-- <a href="/about">TweetAppとは</a> -->
-      </li>
-      <li>
-        <%= link_to("投稿一覧","/posts/index")%>
-      </li>
-      <li>
-        <%= link_to("新規投稿", "/posts/new") %>
-      </li>
-      <li>
-        <%= link_to("ユーザー一覧", "/users/index") %>
-      </li>
-      <li>
-        <%= link_to("新規登録", "/signup") %>
-      </li>
-      <li>
-        <%= link_to("ログイン", "/login")%>
-      </li>
-    </ul>
-  </header>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
 
-<%= yield %> <!-- ここに各ビューファイルが代入される -->
-    <% if flash[:notice]%>
+  <body>
+    <header>
+      <div class="header-logo">
+        <%= link_to("TweetApp", "/") %>
+      </div>
+      <ul class="header-menus">
+        <!-- 以下の1行を削除してください -->
+
+
+        <!-- @current_userに書き換えてください -->
+        <% if @current_user %>
+          <li>
+            <!-- @current_userに書き換えてください -->
+            <%= link_to(@current_user.name, "/users/#{@current_user.id}") %>
+          </li>
+          <li>
+            <%= link_to("投稿一覧", "/posts/index") %>
+          </li>
+          <li>
+            <%= link_to("新規投稿", "/posts/new") %>
+          </li>
+          <li>
+            <%= link_to("ユーザー一覧", "/users/index") %>
+          </li>
+          <li>
+            <%= link_to("ログアウト", "/logout", {method: :post}) %>
+          </li>
+        <% else %>
+          <li>
+            <!-- <%= link_to("TweetAppとは", "/about") %> -->
+          <% if @current_user %>
+            <%= link_to("TweetApp", "/posts/index") %>
+          <% else %>
+            <%= link_to("TweetApp", "/") %>
+          <% end %>
+          </li>
+          <li>
+            <%= link_to("新規登録", "/signup") %>
+          </li>
+          <li>
+            <%= link_to("ログイン", "/login") %>
+          </li>
+        <% end %>
+      </ul>
+    </header>
+
+    <% if flash[:notice] %>
       <div class="flash">
-        <%= flash[:notice ]%>
+        <%= flash[:notice] %>
       </div>
     <% end %>
 
-</body>
+    <%= yield %>
+  </body>
 </html>

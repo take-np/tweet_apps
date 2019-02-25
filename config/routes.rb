@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   post "login" => "users#login"
   # /login で上記2つのルーティングはかぶっているように見えるが、getとpostでは異なるルーティングとして扱われるので問題ない
   # link_toではデフォルトで、getのルーティングを探し、form_tagではデフォルトで、postのルーティングを探す
+  post "logout" => "users#logout"
 
   post "users/:id/update" => "users#update"
 
@@ -13,7 +14,7 @@ Rails.application.routes.draw do
   get "users/:id" => "users#show"
   get "signup" => "users#new"
 
-  # urlは表示名でしかない。signupも、urlに表示されるだけで、コントローラ- アクション。ビューーページ、の関係性は、users#nweで示されている
+  # urlは表示名でしかない。signupも、urlに表示されるだけで、コントローラ- アクション。ビューーページ、の関係性は、users#newで示されている
 
   get 'posts/index' => "posts#index"
   get "posts/new" => "posts#new"

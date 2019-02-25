@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user #投稿はログインしたユーザーしか見れないようにするから、すべてのアクションを指定範囲とする。
+  # ただ、この設定は自分で決める必要がある。今回はprogateにそって決定したが
   def index
     @posts = Post.all.order(created_at: :desc)
     # Post.allで、なぜデータベースを参照できるのか？
@@ -10,6 +12,7 @@ class PostsController < ApplicationController
   end
   def show
     @post = Post.find_by(id: params[:id])
+    @user = User.find_by(id: @post.user_id)
   end
 
   def new
@@ -17,7 +20,10 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(content: params[:content])
+    @post = Post.new(
+      content: params[:content],
+      user_id: @current_user.id
+    )
     @post.save
     if @post.save
       flash[:notice] = "Successfully Created!!"

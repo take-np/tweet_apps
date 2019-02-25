@@ -6,10 +6,11 @@
       <!-- 以下で、メールアドレスを出力してください -->
       <p><%= @user.email %></p>
 
-      <p><img src="<%= "/user_images/#{@user.image_name}" %>">
-</p>
+      <p><img src="<%= "/user_images/#{@user.image_name}" %>"></p>
 
-      <%= link_to("編集", "/users/#{@user.id}/edit") %>
+      <% if @user.id == @current_user.id%>
+        <%= link_to("編集", "/users/#{@user.id}/edit") %>
+      <% end %>
     </div>
   </div>
 </div>
